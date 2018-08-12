@@ -6,6 +6,8 @@ import { CidadeService } from '../../services/domain/cidade.service';
 import { EstadoService } from '../../services/domain/estado.service';
 import { EstadoDTO } from '../../models/estado.dto';
 import { CidadeDTO } from '../../models/cidade.dto';
+import { ClienteService } from '../../services/domain/cliente.service';
+import { AlertController } from '../../../node_modules/ionic-angular/components/alert/alert-controller';
 
 
 @IonicPage()
@@ -25,7 +27,9 @@ export class SignupPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public cidadeService: CidadeService,
-    public estadoService: EstadoService) {
+    public estadoService: EstadoService,
+    public clienteService: ClienteService,
+    public alertCtrl: AlertController) {
       this.formGroup = this.formBuilder.group({
         nome: ['Fulano', [Validators.required, Validators.minLength(5), Validators.maxLength(80)]],
         email: ['fulano@gmail.com', [Validators.required, Validators.email]],
@@ -37,7 +41,7 @@ export class SignupPage {
         complemento: ['Apto 3', []],
         bairro: ['Centro', []],
         cep: ['100202111', [Validators.required]],
-        telefone1: ['79993248954', [Validators.required]],
+        telefone: ['79993248954', [Validators.required]],
         telefone2: ['', []],
         telefone3: ['', []],
         estadoId: [null, [Validators.required]],
@@ -47,7 +51,28 @@ export class SignupPage {
 
 
   signupUser(){
-    
+    this.clienteService.insert(this.formGroup.value)
+      .subscribe(response => {
+        this.showInsertOk();
+      },
+      error => {});
+  }
+
+  showInsertOk(){
+    let alert = this.alertCtrl.create({
+      title: "Sucesso",
+      message: 'Cadastro efetuado com sucesso',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   ionViewDidLoad(){

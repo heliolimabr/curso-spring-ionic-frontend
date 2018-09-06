@@ -16,8 +16,8 @@ export class MyApp {
   pages: Array<{title: string, component: string}>;
 
   constructor(
-    public platform: Platform, 
-    public statusBar: StatusBar, 
+    public platform: Platform,
+    public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public authService: AuthService) {
     this.initializeApp();
@@ -25,6 +25,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Categorias', component: 'CategoriasPage' },
+      { title: 'Carrinho', component: 'CartPage' },
       { title: 'Profile', component: 'ProfilePage' },
       { title: 'Logout', component: '' }
     ];
@@ -49,6 +50,6 @@ export class MyApp {
       default:
         this.nav.setRoot(page.component);
     }
-    
+
   }
 }

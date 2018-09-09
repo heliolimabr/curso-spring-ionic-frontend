@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.heliolimabr.cursospringbootionic" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Sistema de Pedidos - Curso Spring Boot / Ionic</name>
+    <name>Sistema de Pedidos - Curso Spring Boot Ionic</name>
     <description>App de acompanhamento de curso</description>
     <author email="helio.augustolima@gmail.com" href="http://heliolima.tech/">Helio Lima</author>
     <content src="index.html" />
@@ -84,4 +84,5 @@
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="7.0.0" />
+    <engine name="ios" spec="4.5.5" />
 </widget>

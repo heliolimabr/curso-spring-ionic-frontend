@@ -1,3 +1,4 @@
+import { ImageUtilService } from './../image-util.service';
 import { Injectable } from "../../../node_modules/@angular/core";
 import { HttpClient, HttpHeaders } from "../../../node_modules/@angular/common/http";
 import { Observable } from "rxjs/Rx";
@@ -8,7 +9,10 @@ import { StorageService } from "../storage.service";
 @Injectable()
 export class ClienteService {
 
-    constructor(public http: HttpClient, public storage: StorageService){
+    constructor(
+      public http: HttpClient,
+      public storage: StorageService,
+      public imageUtilService: ImageUtilService){
 
     }
 
@@ -36,5 +40,20 @@ export class ClienteService {
 
     findById(id: string){
       return this.http.get(`${API_CONFIG.baseUrl}/clientes/${id}`);
+    }
+
+    uploadPicture(picture: string){
+      let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
+      let formData : FormData = new FormData();
+      formData.set('file', pictureBlob, 'file.png');
+
+      return this.http.post(
+        `${API_CONFIG.baseUrl}/clientes/picture`,
+        formData,
+        {
+            observe: 'response',
+            responseType: 'text'
+        }
+    )
     }
 }

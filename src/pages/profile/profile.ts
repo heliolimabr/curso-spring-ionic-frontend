@@ -102,7 +102,7 @@ export class ProfilePage {
     this.clienteService.uploadPicture(this.picture)
       .subscribe(response => {
         this.picture = null;
-        this.loadData();
+        this.getImageIfExists();
       },
       error => {
 
